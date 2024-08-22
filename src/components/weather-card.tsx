@@ -26,7 +26,7 @@ export default function WeatherCard({
 	const weather = weathers[0];
 
 	return (
-		<div className="h-fit max-h-screen rounded-3xl max-xs:p-6 max-md:p-8 p-10 bg-white/80 overflow-scroll">
+		<div className="h-fit max-sm:w-full max-md:w-[28rem] max-xl:w-[30rem] w-[32rem] max-h-screen rounded-3xl max-xs:p-6 max-md:p-8 p-10 bg-white/80 overflow-scroll">
 			<div className="flex justify-between items-center -mt-6">
 				<h1 className="font-semibold max-md:text-3xl text-4xl">
 					{currentWeather.name}

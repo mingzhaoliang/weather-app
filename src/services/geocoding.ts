@@ -1,10 +1,11 @@
 export const geocoding = async (
+	mode: "city" | "postcode",
 	countryCode: string | undefined,
 	location: string
 ): Promise<{ lat: string; lon: string }> => {
-	const mode = /^[1-9]\d*$/.test(location) ? "zip?zip" : "direct?q";
+	const queryType = mode === "postcode" ? "zip?zip" : "direct?q";
 	const response = await fetch(
-		`http://api.openweathermap.org/geo/1.0/${mode}=${location}${
+		`http://api.openweathermap.org/geo/1.0/${queryType}=${location}${
 			countryCode ? `,${countryCode}` : ""
 		}&appid=${process.env.OPENWEATHERMAP_API_KEY}`
 	);

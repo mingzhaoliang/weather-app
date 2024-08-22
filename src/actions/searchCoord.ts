@@ -17,20 +17,17 @@ export const searchCoord = async (
 
 	const validatedFields = FormSchema.safeParse(formData);
 
-	console.log("validatedFields", validatedFields);
-
 	if (!validatedFields.success) {
 		return { errors: validatedFields.error.flatten().fieldErrors };
 	}
 
-	const { countryCode, location } = validatedFields.data;
+	const { mode, countryCode, location } = validatedFields.data;
 
 	let coordinate: { lat: string; lon: string };
 
 	try {
 		// Get coordinates from location
-		coordinate = await geocoding(countryCode, location);
-		console.log("coordinate", coordinate);
+		coordinate = await geocoding(mode, countryCode, location);
 	} catch (error: any) {
 		console.error(error);
 		return { message: "Location not found." };

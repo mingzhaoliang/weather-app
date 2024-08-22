@@ -22,6 +22,13 @@ import {
 	HoverCardTrigger,
 } from "./ui/shadcn/hover-card";
 import { Input } from "./ui/shadcn/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./ui/shadcn/select";
 import { useToast } from "./ui/shadcn/use-toast";
 import Spinner from "./ui/spinner";
 
@@ -41,12 +48,14 @@ export default function SearchForm({
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
+			mode: "city",
 			countryCode: countryCode ?? "",
 			location: location ?? "",
 		},
 	});
 
 	const submitHandler = async (formData: FormData) => {
+		formData.append("mode", form.getValues("mode"));
 		formData.append("countryCode", form.getValues("countryCode") ?? "");
 		formAction(formData);
 	};
@@ -67,6 +76,32 @@ export default function SearchForm({
 				action={submitHandler}
 				className="relative w-full flex max-xs:flex-col sm:items-center gap-2"
 			>
+				<FormField
+					control={form.control}
+					name="mode"
+					render={({ field }) => (
+						<FormItem>
+							<Select
+								onValueChange={field.onChange}
+								defaultValue={field.value}
+							>
+								<FormControl>
+									<SelectTrigger className="rounded-full sm:h-12 focus-visible:ring-0 focus-visible:ring-offset-0 opacity-80">
+										<SelectValue />
+									</SelectTrigger>
+								</FormControl>
+								<SelectContent>
+									<SelectItem value="city">
+										By city name
+									</SelectItem>
+									<SelectItem value="postcode">
+										By postcode
+									</SelectItem>
+								</SelectContent>
+							</Select>
+						</FormItem>
+					)}
+				/>
 				<SelectCountry form={form} />
 				<div className="w-full flex items-center">
 					<FormField

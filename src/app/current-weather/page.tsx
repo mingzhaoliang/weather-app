@@ -20,8 +20,6 @@ export default async function Page({
 		lon
 	)) as CurrentWeather;
 
-	console.log(currentWeather);
-
 	return (
 		<div
 			className="w-screen min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
