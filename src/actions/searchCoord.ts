@@ -17,6 +17,8 @@ export const searchCoord = async (
 
 	const validatedFields = FormSchema.safeParse(formData);
 
+	console.log("validatedFields", validatedFields);
+
 	if (!validatedFields.success) {
 		return { errors: validatedFields.error.flatten().fieldErrors };
 	}
