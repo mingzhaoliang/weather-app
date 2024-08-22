@@ -2,6 +2,8 @@ import SearchForm from "@/components/search-form";
 import WeatherCard from "@/components/weather-card";
 import { CurrentWeather } from "@/lib/types/CurrentWeather.type";
 import { getCurrentWeather } from "@/services/getCurrentWeather";
+import { House } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Page({
@@ -22,19 +24,22 @@ export default async function Page({
 
 	return (
 		<div
-			className="w-screen min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
+			className="w-screen min-h-screen p-12 bg-cover bg-center flex flex-col items-end gap-8"
 			style={{
 				backgroundImage: `url(/images/${currentWeather.weather[0].main.toLowerCase()}.jpg)`,
 			}}
 		>
-			<div className="p-4 max-xs:w-full max-md:w-[28rem] max-xl:w-[30rem] w-[32rem] space-y-4">
+			<div className="w-full flex justify-between items-center gap-4">
+				<Link href="/" className="rounded-full bg-white/80 p-2">
+					<House className="h-8 w-8" />
+				</Link>
 				<SearchForm
 					key={currentWeather.name}
 					countryCode={currentWeather.sys.country}
 					location={currentWeather.name}
 				/>
-				<WeatherCard currentWeather={currentWeather} />
 			</div>
+			<WeatherCard currentWeather={currentWeather} />
 		</div>
 	);
 }

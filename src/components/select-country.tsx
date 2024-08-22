@@ -63,7 +63,7 @@ export default function SelectCountry({ form }: { form: any }) {
 									variant="outline"
 									role="combobox"
 									aria-expanded={open}
-									className="max-xs:w-full w-32 h-12 rounded-full flex justify-between items-center"
+									className="max-sm:w-full w-32 sm:h-12 rounded-full flex justify-between items-center opacity-80"
 								>
 									<p className="text-ellipsis text-nowrap overflow-hidden">
 										{field.value

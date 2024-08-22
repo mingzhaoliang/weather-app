@@ -74,7 +74,7 @@ export default function SearchForm({
 		<Form {...form}>
 			<form
 				action={submitHandler}
-				className="relative w-full flex max-xs:flex-col sm:items-center gap-2"
+				className="relative lg:w-[40rem] grid grid-cols-2 sm:flex gap-2"
 			>
 				<FormField
 					control={form.control}
@@ -103,7 +103,7 @@ export default function SearchForm({
 					)}
 				/>
 				<SelectCountry form={form} />
-				<div className="w-full flex items-center">
+				<div className="relative max-sm:col-span-2 max-sm:w-full flex-1 flex items-center">
 					<FormField
 						control={form.control}
 						name="location"
@@ -111,12 +111,12 @@ export default function SearchForm({
 							<FormItem className="flex-1">
 								<FormControl>
 									<Input
-										className="h-12 pr-12 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-full"
-										placeholder="Enter a city name or postal code"
+										className="sm:h-12 pr-12 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-full opacity-80"
+										placeholder="Enter a city name or postcode"
 										{...field}
 									/>
 								</FormControl>
-								<FormMessage className="absolute top-12">
+								<FormMessage className="absolute pl-1 max-sm:top-[5.5rem] top-[6.5rem]">
 									{actionState?.errors?.location}
 								</FormMessage>
 							</FormItem>
