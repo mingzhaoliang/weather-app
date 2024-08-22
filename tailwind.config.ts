@@ -18,6 +18,10 @@ const config = {
 			},
 		},
 		extend: {
+			backgroundImage: {
+				default:
+					"url('/images/body-of-water-with-mountains-on-side.jpg')",
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
