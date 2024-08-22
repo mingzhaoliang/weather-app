@@ -20,7 +20,13 @@ import { Input } from "./ui/shadcn/input";
 import { useToast } from "./ui/shadcn/use-toast";
 import Spinner from "./ui/spinner";
 
-export default function SearchForm() {
+export default function SearchForm({
+	countryCode,
+	location,
+}: {
+	countryCode?: string;
+	location?: string;
+}) {
 	const { toast } = useToast();
 	const [actionState, formAction] = useFormState<ActionState, FormData>(
 		searchCoord,
@@ -30,8 +36,8 @@ export default function SearchForm() {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			countryCode: "",
-			location: "",
+			countryCode: countryCode ?? "",
+			location: location ?? "",
 		},
 	});
 
@@ -54,7 +60,7 @@ export default function SearchForm() {
 		<Form {...form}>
 			<form
 				action={submitHandler}
-				className="relative w-[32rem] flex max-xs:flex-col sm:items-center gap-2"
+				className="relative w-full flex max-xs:flex-col sm:items-center gap-2"
 			>
 				<SelectCountry form={form} />
 				<div className="w-full flex items-center">

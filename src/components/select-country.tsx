@@ -16,6 +16,17 @@ import {
 import { FormControl, FormField, FormItem } from "./ui/shadcn/form";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/shadcn/popover";
 
+function sortCountries(
+	countries: { label: string; value: string }[],
+	selectedValue?: string
+) {
+	return countries.sort((a, b) => {
+		if (a.value === selectedValue) return -1;
+		if (b.value === selectedValue) return 1;
+		return a.value > b.value ? 1 : -1;
+	});
+}
+
 export default function SelectCountry({ form }: { form: any }) {
 	const [open, setOpen] = useState(false);
 	const countries = useMemo(
@@ -26,6 +37,18 @@ export default function SelectCountry({ form }: { form: any }) {
 			})),
 		[]
 	);
+
+	sortCountries(countries, form.getValues("countryCode"));
+
+	const selectHandler = (fieldValue: string, countryValue: string) => {
+		form.setValue(
+			"countryCode",
+			fieldValue === countryValue ? "" : countryValue
+		);
+		setOpen(false);
+
+		sortCountries(countries, countryValue);
+	};
 
 	return (
 		<FormField
@@ -69,14 +92,10 @@ export default function SelectCountry({ form }: { form: any }) {
 												key={country.value}
 												value={country.label}
 												onSelect={() => {
-													form.setValue(
-														"countryCode",
-														field.value ===
-															country.value
-															? ""
-															: country.value
+													selectHandler(
+														field.value,
+														country.value
 													);
-													setOpen(false);
 												}}
 												className="px-0 cursor-pointer"
 											>
