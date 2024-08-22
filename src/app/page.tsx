@@ -1,9 +1,9 @@
-import SearchBar from "@/components/search-bar";
+import SearchForm from "@/components/search-form";
 
 export default function Home() {
 	return (
-		<main className="w-screen min-h-screen bg-default bg-cover bg-center flex justify-center items-center">
-			<SearchBar />
-		</main>
+		<div className="w-screen min-h-screen px-4 bg-default bg-cover bg-center flex justify-center items-center">
+			<SearchForm />
+		</div>
 	);
 }
